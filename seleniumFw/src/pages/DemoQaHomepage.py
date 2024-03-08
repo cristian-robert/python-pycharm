@@ -2,7 +2,7 @@ from seleniumFw.src.SeleniumExtended import SeleniumExtended
 from seleniumFw.src.enums.main_elements_paths import MainElementsPaths
 from seleniumFw.src.pages.locators.DemoQaHomepageLocators import DemoQaHomepageLocators
 from seleniumFw.src.helpers.config_helpers import get_base_url
-
+from selenium.common.exceptions import NoSuchElementException
 
 class DemoQaHomepage(DemoQaHomepageLocators):
 
@@ -36,3 +36,5 @@ class DemoQaHomepage(DemoQaHomepageLocators):
     def go_to_elements_page(self):
         self.sl.wait_scroll_and_click(self.ELEMENTS_CARD)
         assert self.driver.current_url == get_base_url() + MainElementsPaths.ELEMENTS_CARD.value, "URL mismatch for Elements"
+
+

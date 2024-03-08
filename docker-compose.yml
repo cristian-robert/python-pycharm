@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: roby248/automation:latest # Custom WordPress image from Docker Hub
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: password
+    volumes:
+      - wordpress_data:/var/www/html # References the 'wordpress_data' volume
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql # References the 'db_data' volume
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    restart: always
+
+volumes:
+  wordpress_data: # This should define the 'wordpress_data' volume
+  db_data: # This should define the 'db_data' volume

@@ -16,8 +16,19 @@ class DemoQaElementsLocators:
 
     # Check Box
     CHECK_BOX = (By.XPATH, "//span[text()='Check Box']")
+    CHECK_BOX_HOME_TOGGLE = (By.XPATH, "//label[@for='tree-node-home']/preceding-sibling::button[@aria-label='Toggle']")
+    CHECK_BOX_DESKTOP_TOGGLE = (By.XPATH, "//label[@for='tree-node-desktop']/preceding-sibling::button[@aria-label='Toggle']")
+    CHECK_BOX_DOCUMENTS_TOGGLE = (By.XPATH, "//label[@for='tree-node-documents']/preceding-sibling::button[@aria-label='Toggle']")
+    CHECK_BOX_DOWNLOADS_TOGGLE = (By.XPATH, "//label[@for='tree-node-downloads']/preceding-sibling::button[@aria-label='Toggle']")
     CHECK_BOX_HOME = (By.XPATH, "//span[text()='Home']")
     CHECK_BOX_DESKTOP = (By.XPATH, "//span[text()='Desktop']")
+    CHECK_BOX_DOCUMENTS = (By.XPATH, "//span[text()='Documents']")
+    CHECK_BOX_DOWNLOADS = (By.XPATH, "//span[text()='Downloads']")
+    CHECK_BOX_COMMANDS = (By.XPATH, "//span[text()='Commands']")
+    CHECK_BOX_WORKSPACE = (By.XPATH, "//span[text()='Workspace']")
+    CHECK_BOX_OFFICE = (By.XPATH, "//span[text()='Office']")
+    WORD = (By.XPATH, "//span[text()='Word File.doc']")
+    EXCEL = (By.XPATH, "//span[text()='Excel File.doc']")
     CHECK_BOX_NOTES = (By.XPATH, "//span[text()='Notes']")
     CHECK_BOX_RESULT = (By.XPATH, "//span[@class='text-success']")
 
@@ -71,3 +82,4 @@ class DemoQaElementsLocators:
     RESULT_CREATED = (By.XPATH, "//h1[text()='Created']")
     RESULT_NO_CONTENT = (By.XPATH, "//h1[text()='No Content']")
 
+    ACCEPT_COOKIES_BUTTON = (By.CSS_SELECTOR, ".fc-cta-consent .fc-button-label")

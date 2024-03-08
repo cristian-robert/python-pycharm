@@ -1,5 +1,7 @@
 import pdb
 
+from selenium.common import NoSuchElementException
+
 from seleniumFw.src.helpers.faker_generator import FakerGenerator
 
 from seleniumFw.src.SeleniumExtended import SeleniumExtended
@@ -34,7 +36,11 @@ class DemoQaElementsPage(DemoQaElementsLocators):
     def click_links(self):
         self.sl.wait_and_click(self.LINKS)
 
+    def click_check_box_home(self):
+        self.sl.wait_and_click(self.CHECK_BOX_HOME)
 
+    def click_check_box_home_toggle(self):
+        self.sl.wait_and_click(self.CHECK_BOX_HOME_TOGGLE)
 
     #method to test text box
     def test_text_box(self):
@@ -48,6 +54,34 @@ class DemoQaElementsPage(DemoQaElementsLocators):
         self.sl.wait_until_element_contains_text(self.TEXT_BOX_EMAIL_RESULT, self.generated_email)
         self.sl.wait_until_element_contains_text(self.TEXT_BOX_CURRENT_ADDRESS_RESULT, self.generated_current_address)
         self.sl.wait_until_element_contains_text(self.TEXT_BOX_PERMANENT_ADDRESS_RESULT, self.generated_permanent_address)
+
+    def try_to_accept_cookies(self):
+        # if self.sl.check_element_displayed(self.ACCEPT_COOKIES_BUTTON):
+        #     self.sl.wait_and_click(self.ACCEPT_COOKIES_BUTTON)
+        try:
+            self.sl.wait_and_click(self.ACCEPT_COOKIES_BUTTON)
+        except NoSuchElementException:
+            pass
+
+    def test_check_box_desktop_toggle(self):
+        self.sl.wait_and_click(self.CHECK_BOX_DESKTOP_TOGGLE)
+        self.sl.check_elements_displayed(self.CHECK_BOX_NOTES, self.CHECK_BOX_COMMANDS)
+
+    def test_check_box_documents_toggle(self):
+        self.sl.wait_and_click(self.CHECK_BOX_DOCUMENTS_TOGGLE)
+        self.sl.check_elements_displayed(self.CHECK_BOX_WORKSPACE, self.CHECK_BOX_OFFICE)
+
+    def test_check_box_downloads_toggle(self):
+        self.sl.wait_and_click(self.CHECK_BOX_DOWNLOADS_TOGGLE)
+        self.sl.check_elements_displayed(self.WORD, self.EXCEL)
+    def test_check_box(self):
+        self.click_check_box()
+        self.click_check_box_home()
+        self.click_check_box_home_toggle()
+        self.sl.check_elements_displayed(self.CHECK_BOX_DESKTOP, self.CHECK_BOX_DOCUMENTS, self.CHECK_BOX_DOWNLOADS)
+        self.test_check_box_desktop_toggle()
+        self.test_check_box_documents_toggle()
+        self.test_check_box_downloads_toggle()
 
 
 

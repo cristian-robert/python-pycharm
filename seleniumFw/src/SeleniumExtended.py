@@ -33,3 +33,17 @@ class SeleniumExtended:
         )
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
         element.click()
+
+    def check_element_displayed(self, locator, timeout=None):
+        timeout = timeout if timeout is not None else self.default_timeout
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+            return True
+        except Exception:
+            return False
+
+    def check_elements_displayed(self, *locators, timeout=None):
+        results = {}
+        for locator in locators:
+            results[locator] = self.check_element_displayed(locator, timeout=timeout)
+        return results

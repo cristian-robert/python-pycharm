@@ -11,5 +11,5 @@ class FakerGenerator:
         return self.faker.email()
 
     def address(self):
-        return self.faker.address()
+        return self.faker.street_address()
 
