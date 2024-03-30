@@ -1,9 +1,14 @@
 import allure
-import pytest
 import pytest_html
 from selenium import webdriver
 import os
 from seleniumFw.src.helpers.config_helpers import get_base_url
+import logging
+import sys
+
+import pytest
+
+from reportportal_client import RPLogger
 
 
 @pytest.fixture(scope="function")
@@ -13,7 +18,8 @@ def init_driver(request):
 
     browser = os.environ.get('BROWSER', None)
     if not browser:
-        raise Exception("The environment variable 'BROWSER' must be set.")
+        browser = 'chrome'
+        print(f"Browser not specified, defaulting to '{browser}'")
 
     browser = browser.lower()
     if browser not in supported_browsers:
@@ -33,10 +39,9 @@ def init_driver(request):
         options.add_argument('window-size=1920x1080')
         driver = webdriver.Chrome(options=options)
     driver.get(get_base_url())
-    # DemoQaElementsPage.try_to_accept_cookies(DemoQaElementsPage(driver))
     request.cls.driver = driver
-    # yield
-    # driver.quit()
+    yield
+    driver.quit()
     pass
 
 
@@ -53,7 +58,8 @@ def pytest_runtest_makereport(item, call):
                 results_dir = os.environ.get('RESULTS_DIR')
                 print(f"results_dir: {results_dir}")
                 if not results_dir:
-                    raise Exception("The environment variable 'RESULTS_DIR' must be set.")
+                    results_dir = os.path.join(os.getcwd(), 'results')
+                    print(f"results_dir not set, defaulting to: {results_dir}")
                 screenshot_file = os.path.join(results_dir, item.name + ".png")
                 driver = item.cls.driver
                 try:
@@ -75,7 +81,8 @@ def pytest_runtest_makereport(item, call):
             if if_frontend_test:
                 results_dir = os.environ.get("RESULTS_DIR")
                 if not results_dir:
-                    raise Exception("The environment variable 'RESULTS_DIR' must be set.")
+                    results_dir = os.path.join(os.getcwd(), 'results')
+                    print(f"results_dir not set, defaulting to: {results_dir}")
                 screenshot_file = os.path.join(results_dir, item.name + ".png")
                 driver = item.cls.driver
                 try:
@@ -84,3 +91,10 @@ def pytest_runtest_makereport(item, call):
                         allure.attach(file.read(), name="screenshot", attachment_type=allure.attachment_type.PNG)
                 except Exception as e:
                     print(f"Error occurred while saving screenshot: {str(e)}")
+
+    @pytest.fixture(scope="session")
+    def rp_logger():
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
+        logging.setLoggerClass(RPLogger)
+        return logger

@@ -12,6 +12,9 @@ class TestEndToEndCheckoutGuestUser:
 
     @pytest.mark.tcid03
     def test_guest_user_can_checkout(self):
+        """
+        Test end to end checkout for guest user
+        """
         home_page = HomePage(self.driver)
         header = Header(self.driver)
         cart_page = CartPage(self.driver)

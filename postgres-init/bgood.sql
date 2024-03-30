@@ -45,6 +45,7 @@ CREATE SEQUENCE public.api_keys_id_seq
     NO MAXVALUE
     CACHE 1;
 
+ALTER TABLE public.issue_type_project OWNER TO rpuser;
 
 ALTER SEQUENCE public.api_keys_id_seq OWNER TO rpuser;
 
@@ -296,6 +297,57 @@ INSERT INTO public.project_user VALUES (6, 7, 'MEMBER') ON CONFLICT DO NOTHING;
 INSERT INTO public.project_user VALUES (6, 10, 'PROJECT_MANAGER') ON CONFLICT DO NOTHING;
 
 
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (1, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (1, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (1, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (1, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (1, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (2, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (2, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (2, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (2, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (2, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (3, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (3, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (3, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (3, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (3, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (4, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (4, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (4, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (4, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (4, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (5, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (5, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (5, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (5, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (5, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (6, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (6, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (6, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (6, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (6, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (7, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (7, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (7, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (7, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (7, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (8, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (8, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (8, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (8, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (8, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (9, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (9, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (9, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (9, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (9, 5) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (10, 1) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (10, 4) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (10, 2) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (10, 3) ON CONFLICT DO NOTHING;
+INSERT INTO public.issue_type_project (project_id, issue_type_id) VALUES (10, 5) ON CONFLICT DO NOTHING;
+
 
 
 
@@ -361,6 +413,17 @@ ALTER TABLE ONLY public.project
     ADD CONSTRAINT project_pk PRIMARY KEY (id);
 
 
+ALTER TABLE ONLY public.issue_type_project
+    ADD CONSTRAINT issue_type_project_issue_type_id_fkey FOREIGN KEY (issue_type_id) REFERENCES public.issue_type(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3838 (class 2606 OID 17672)
+-- Name: issue_type_project issue_type_project_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: rpuser
+--
+
+ALTER TABLE ONLY public.issue_type_project
+    ADD CONSTRAINT issue_type_project_project_id_fkey FOREIGN KEY (project_id) REFERENCES public.project(id) ON DELETE CASCADE;
 --
 -- TOC entry 3425 (class 2606 OID 17064)
 -- Name: project_attribute unique_attribute_per_project; Type: CONSTRAINT; Schema: public; Owner: rpuser
