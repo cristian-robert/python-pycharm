@@ -13,3 +13,9 @@ class FakerGenerator:
     def address(self):
         return self.faker.street_address()
 
+    def generate_random_string(self, length):
+        return self.faker.pystr(min_chars=length, max_chars=length)
+
+    def username(self):
+        return self.faker.user_name()
+

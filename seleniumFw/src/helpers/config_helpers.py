@@ -6,6 +6,6 @@ def get_base_url():
     env = os.environ.get('ENV', 'test')
 
     if env.lower() == 'test':
-        return 'https://demoqa.com'
+        return 'http://localhost:8000'
     else:
         raise Exception(f"Environment unknown: {env}.")

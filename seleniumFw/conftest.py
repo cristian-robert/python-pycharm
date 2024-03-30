@@ -4,8 +4,6 @@ import pytest_html
 from selenium import webdriver
 import os
 from seleniumFw.src.helpers.config_helpers import get_base_url
-from seleniumFw.src.pages.DemoQaElementsPage import DemoQaElementsPage
-from seleniumFw.src.pages.DemoQaHomepage import DemoQaHomepage
 
 
 @pytest.fixture(scope="function")
@@ -35,10 +33,10 @@ def init_driver(request):
         options.add_argument('window-size=1920x1080')
         driver = webdriver.Chrome(options=options)
     driver.get(get_base_url())
-    DemoQaElementsPage.try_to_accept_cookies(DemoQaElementsPage(driver))
+    # DemoQaElementsPage.try_to_accept_cookies(DemoQaElementsPage(driver))
     request.cls.driver = driver
-    yield
-    driver.quit()
+    # yield
+    # driver.quit()
     pass
 
 
