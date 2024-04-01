@@ -57,6 +57,8 @@ def pytest_runtest_makereport(item, call):
             if if_frontend_test:
                 results_dir = os.environ.get('RESULTS_DIR')
                 if not results_dir:
+                    if not os.path.exists('results'):
+                        os.makedirs('results')
                     results_dir = os.path.join(os.getcwd(), 'results')
                     print(f"results_dir not set, defaulting to: {results_dir}")
 
@@ -69,10 +71,6 @@ def pytest_runtest_makereport(item, call):
                     # Add allure attachment
                     with open(screenshot_file, 'rb') as file:
                         allure.attach(file.read(), name="screenshot", attachment_type=allure.attachment_type.PNG)
-                    print("###############################")
-                    print("###############################")
-                    print("###############################")
-                    print("###############################")
                     logging.setLoggerClass(RPLogger)
                     rp_logger = logging.getLogger(__name__)
                     rp_logger.setLevel(logging.DEBUG)
